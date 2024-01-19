@@ -1,0 +1,216 @@
+﻿
+*********************************
+*********************************
+******** CLASSE BANDA ***********
+*********************************
+*********************************
+
+
+
+A classe banda inicia com uma lista vazia do tipo Album chamada albuns 
+e uma lista vazia do tipo Avaliação chamada notas.
+
+    private List<Album> albuns = new List<Album>();
+    private List<Avaliacao> notas = new List<Avaliacao>();
+
+
+
+
+A classe contém um construtor que inicializa a propriedade Nome:
+
+    public Banda(string nome) => (Nome) = (nome);
+
+
+
+propriedades do tipo string chamada Nome:
+
+    public string Nome { get; }
+
+
+
+e outra propriedade do tipo double chamada Média.
+Média é calculada através de uma sequência de números inteiros, sendo
+assim através da lista notas acessamos o método Average que após ace-
+ssar a propriedade Nota da classe Avaliação, calcula a média da vari-
+ável:
+
+    public double Media => notas.Average(a => a.Nota);
+
+
+
+A classe ainda carrega dois métodos públicos e com retorno
+o método AdicionarAlbum() adiciona um album a lista albuns:
+
+    public void AdicionarAlbum(Album album) 
+        { 
+            albuns.Add(album);
+        }
+
+
+
+o método AdicionarNota() adiciona uma nota referente a banda à lista 
+notas:
+
+    public void AdicionarNota(Avaliacao nota)
+        {
+            notas.Add(nota);
+        }
+
+
+
+
+o método ExibirDiscografia() exibe todos os valores encontrados na lis
+ta albuns através de um laço de repetição foreach:
+
+
+    public void ExibirDiscografia()  
+        {
+            Console.WriteLine($"Discografia da banda {Nome}");
+            foreach (Album album in albuns)
+            {
+                Console.WriteLine($"Álbum: {album.Nome} ({album.Duraca
+                o Total})");
+            }
+        }
+
+
+
+*********************************
+*********************************
+******** CLASSE MUSICA **********
+*********************************
+*********************************
+
+
+ A classe musica contém um construtor para inicializar as propriedades
+ :
+
+     public Musica(Banda artista, string nome) => (Artista, Nome) = (a
+     rtista, nome);
+
+
+
+as propriedades que a classe carrega são Nome, Artista, Duracao, Dispo
+nivel e DescricaoResumida:
+
+    public string Nome { get; }
+    public Banda Artista { get; }
+    public int Duracao { get; set; }
+    public bool Disponivel { get; set; }
+    public string DescricaoResumida => $"A música {Nome} pertence à ba
+    nda {Artista}";
+
+
+
+foi criado um método no qual imprime no console todos os detalhes da
+música, o método tambem passa por uma condição que verifica se o usuá-
+rio contém o plano de fidelidade:
+
+
+
+    public void ExibirFichaTecnica()
+    {
+        Console.WriteLine($"Nome: {Nome}");
+        Console.WriteLine($"Artista: {Artista.Nome}");
+        Console.WriteLine($"Duração: {Duracao}");
+        if (Disponivel)
+        {
+            Console.WriteLine("Disponível no plano.");
+        } else
+        {
+            Console.WriteLine("Adquira o plano Plus+");
+        }
+    }
+
+
+
+    
+*********************************
+*********************************
+******** CLASSE ALBUM ***********
+*********************************
+*********************************
+
+
+
+
+
+A classe album  se assemelha as anteriores, contendo basicamente os 
+mesmos métodos e usando construtores e propriedades.
+
+Temos uma lista do tipo Musica com o nome musicas no inicio da classe:
+
+
+    private List<Musica> musicas = new List<Musica>();
+
+
+
+
+um construtor para inicializar a propriedade Nome:
+
+
+    public Album(string nome)
+    {
+        Nome = nome;
+    }
+
+
+
+
+propriedades:
+
+
+    public string Nome { get; }
+    public int DuracaoTotal => musicas.Sum(m => m.Duracao);
+    public List<Musica> Musicas => musicas;
+
+
+
+
+e métodos, o primeiro adiciona musicas na lista musicas:
+
+
+    public void AdicionarMusica(Musica musica)
+    {
+        musicas.Add(musica);
+    }
+
+
+
+
+e o seguinte exibe a lista de músicas no console:
+
+
+    public void ExibirMusicasDoAlbum()
+    {
+        Console.WriteLine($"Lista de músicas do álbum {Nome}:\n");
+        foreach (var musica in musicas)
+        {
+            Console.WriteLine($"Música: {musica.Nome}");
+        }
+        Console.WriteLine($"\nPara ouvir este álbum inteiro você preci
+        sa de {DuracaoTotal}");
+    }
+
+
+
+
+
+
+*********************************
+*********************************
+******* CLASSE AVALIACAO ********
+*********************************
+*********************************
+
+
+A classe Avaliacao carrega unica e exclusivamente o método de avaliação
+de uma banda, ela contém um construtor que inicializa a propriedade No-
+ta:
+
+    public Avaliacao(int nota)
+    {
+        Nota = nota;
+    }
+    public int Nota { get; }
+
